@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Hubby ❤️</title>
+    <!-- Google Fonts for Cute Handwriting & Bubbly Text -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Caveat:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pink-primary: #ffb6c1;
+            --pink-dark: #ff69b4;
+            --pink-light: #fff0f5;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Fredoka One', cursive;
+            background-color: var(--pink-light);
+            background-image: radial-gradient(#ffb6c1 8%, transparent 8%);
+            background-size: 24px 24px;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Page Layouts --- */
+        .page {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .active {
+            display: flex;
+        }
+
+        /* --- Welcome Screen (Heart Pop-up) --- */
+        #welcome-screen {
+            background-color: rgba(255, 240, 245, 0.95);
+            z-index: 10;
+            flex-direction: column;
+        }
+
+        .heart-btn {
+            font-size: 100px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            animation: pulse 1.2s infinite;
+            transition: transform 0.2s;
+        }
+
+        .heart-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .welcome-text {
+            color: var(--pink-dark);
+            margin-top: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        /* --- Page 1: Passcode Interface --- */
+        .interface-container {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            border: 6px solid var(--pink-primary);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.5);
+            max-width: 900px;
+            width: 100%;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Polaroid Photo Frame */
+        .polaroid-frame {
+            background: white;
+            padding: 20px 20px 40px 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            transform: rotate(-3deg);
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .polaroid-frame::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 35%;
+            width: 100px;
+            height: 30px;
+            background: rgba(255, 182, 193, 0.6);
+            transform: rotate(2deg);
+        }
+
+        .polaroid-frame img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border: 2px solid #f0f0f0;
+            border-radius: 8px;
+        }
+
+        /* Passcode Side */
+        .passcode-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .passcode-title {
+            color: var(--pink-dark);
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .slots-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .slot {
+            width: 45px;
+            height: 45px;
+            border: 3px solid var(--pink-primary);
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: var(--pink-dark);
+        }
+
+        /* 1 to 20 Keypad Grid */
+        .keypad-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .key-btn {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 3px solid var(--pink-primary);
+            border-radius: 50%;
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            color: var(--pink-dark);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 0 var(--pink-primary);
+        }
+
+        .key-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .unlock-btn {
+            background: var(--pink-dark);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #db2777;
+            transition: all 0.1s;
+        }
+
+        .unlock-btn:active {
+            transform: translateY(5px);
+            box-shadow: none;
+        }
+
+        /* --- Page 2: Question & Message Card --- */
+        #message-screen {
+            flex-direction: column;
+            background: var(--pink-light);
+        }
+
+        .question-box {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            border: 4px dashed var(--pink-dark);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            max-width: 500px;
+            width: 100%;
+            z-index: 5;
+        }
+
+        .question-box h2 {
+            color: var(--pink-dark);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .q-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 50px;
+        }
+
+        .action-btn {
+            padding: 10px 30px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 18px;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .yes-btn { background: #4ade80; color: white; }
+        .no-btn { background: #f87171; color: white; position: relative; }
+
+        /* The Big Cute Message Card */
+        .cute-card {
+            display: none;
+            background: #fff;
+            border: 10px solid #fff;
+            border-image: radial-gradient(var(--pink-primary) 20%, transparent 20%) 16;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+            max-height: 75vh;
+            overflow-y: auto;
+            padding: 35px;
+            position: relative;
+            z-index: 5;
+            text-align: center;
+        }
+
+        .card-text {
+            font-family: 'Caveat', cursive;
+            font-size: 28px;
+            line-height: 1.6;
+            color: #333;
+            white-space: pre-line;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .click-here-btn {
+            background: var(--pink-dark);
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #db2777;
+        }
+
+        /* Falling Hearts Animation */
+        .heart-fall {
+            position: absolute;
+            top: -50px;
+            font-size: 24px;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 4;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+            }
+        }
+
+        /* --- Page 3: Last Scrapbook Screen --- */
+        #final-screen {
+            flex-direction: column;
+            background: var(--pink-light);
+        }
+
+        .scrapbook-container {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .deco-frame {
+            background: white;
+            padding: 15px 15px 35px 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            max-width: 280px;
+            position: relative;
+        }
+
+        .frame-1 { transform: rotate(-5deg); border: 4px solid var(--pink-primary); }
+        .frame-2 { transform: rotate(5deg); border: 4px solid #bbf7d0; }
+
+        .deco-frame img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .sticker {
+            position: absolute;
+            font-size: 30px;
+        }
+        .st-1 { top: -20px; left: -10px; }
+        .st-2 { bottom: 10px; right: -10px; }
+
+        .proposal-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 45px;
+            color: var(--pink-dark);
+            text-shadow: 2px 2px 0px white;
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Custom Scrollbar for Card */
+        .cute-card::-webkit-scrollbar {
+            width: 8px;
+        }
+        .cute-card::-webkit-scrollbar-thumb {
+            background: var(--pink-primary);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 0. WELCOME POP-UP -->
+    <div id="welcome-screen" class="page active">
+        <button class="heart-btn" onclick="startApp()">❤️</button>
+        <div class="welcome-text">Tap the Heart to Open ✨</div>
+    </div>
+
+    <!-- 1. PASSCODE PAGE -->
+    <div id="passcode-screen" class="page">
+        <div class="interface-container">
+            <!-- Left Side Photo Frame -->
+            <div class="polaroid-frame">
+                <img src="IMG_20260717_111529_590.jpg" alt="Beach Moment">
+            </div>
+            
+            <!-- Right Side Passcode Lock -->
+            <div class="passcode-side">
+                <h2 class="passcode-title">Enter a Passcode</h2>
+                <div class="slots-container">
+                    <div class="slot" id="slot-0"></div>
+                    <div class="slot" id="slot-1"></div>
+                    <div class="slot" id="slot-2"></div>
+                    <div class="slot" id="slot-3"></div>
+                </div>
+                
+                <!-- 1 to 20 Cute Shape Numbers -->
+                <div class="keypad-grid" id="keypad"></div>
+                
+                <button class="unlock-btn" onclick="verifyPasscode()">Unlock</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. ASK & LOVE LETTER PAGE -->
+    <div id="message-screen" class="page">
+        <!-- Step A: Question Box -->
+        <div class="question-box" id="q-box">
+            <img src="file_000000002ec47207b500cc2ce163fb28.png" class="q-img" alt="Cute Us">
+            <h2>I made something for you, would you like to see it?</h2>
+            <div class="btn-row">
+                <button class="action-btn yes-btn" onclick="showLoveLetter()">Yes</button>
+                <button class="action-btn no-btn" id="no-button" onclick="rejectNo()">No</button>
+            </div>
+        </div>
+
+        <!-- Step B: The Cute Card Letter -->
+        <div class="cute-card" id="love-letter">
+            <div class="card-text">yuvvvvvvvvvv myyyy hubbyyyy 👉🏻👈🏻❤️
+            nah aaj koi special day nah hi kuch khas hai bas mujhe apko yeh realise karwana hai ki aap mere sabse favourite person ho 🥹🫶❤️ or kitna pyar krti hu me apse 💕waise yeh web banane me bahot der lagi hai but yeh chote chize dekhkr jab aapke face pe yeh cute si smile aati haina wahi sabse jada kimati hai mujhe kuch nhi chahie bas yeh chahti hu ki aap humesha khush rho humesha mere rho 👉🏻👈🏻❤️ mere payre bache banke rho 😭❤️or jaldi jaldi mujhe milo real life me aake apke sath ghumna hai muje jagah jagah💋💋👉🏻👈🏻 mere pati dev i love you so much 😘😘💕❤️uuuummmmaaaahhh 😘😘😘💕💕❤️❤️</div>
+            <button class="click-here-btn" onclick="goToFinalPage()">Click Here</button>
+        </div>
+    </div>
+
+    <!-- 3. FINAL DECORATED PAGE -->
+    <div id="final-screen" class="page">
+        <div class="scrapbook-container">
+            <div class="deco-frame frame-1">
+                <span class="sticker st-1">🍼</span>
+                <img src="file_000000002ec47207b500cc2ce163fb28.png" alt="Scrapbook 1">
+                <span class="sticker st-2">✨</span>
+            </div>
+            <div class="deco-frame frame-2">
+                <span class="sticker st-1">🧸</span>
+                <img src="file_0000000059c07207bd6dd5eb13e37fa9.png" alt="Scrapbook 2">
+                <span class="sticker st-2">💋</span>
+            </div>
+        </div>
+        <h1 class="proposal-text">Will you be mine?</h1>
+    </div>
+
+    <script>
+        // Setup State variables
+        let currentInput = "";
+        const correctCode = "2930";
+        let heartInterval;
+
+        // 1. App start on Heart tap
+        function startApp() {
+            document.getElementById('welcome-screen').classList.remove('active');
+            document.getElementById('passcode-screen').classList.add('active');
+            generateKeypad();
+        }
+
+        // 2. Generate numbers from 1 to 20 dynamically
+        function generateKeypad() {
+            const keypad = document.getElementById('keypad');
+            for (let i = 1; i <= 20; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'key-btn';
+                btn.innerText = i;
+                btn.onclick = () => handleKeyPress(i);
+                keypad.appendChild(btn);
+            }
+        }
+
+        // 3. Handle Number inputs with masked pink hearts text
+        function handleKeyPress(num) {
+            if (currentInput.length < 4) {
+                currentInput += num.toString();
+                updateSlots();
+            }
+        }
+
+        function updateSlots() {
+            for (let i = 0; i < 4; i++) {
+                const slot = document.getElementById(`slot-${i}`);
+                if (i < currentInput.length) {
+                    slot.innerText = "💗"; // Masking display
+                } else {
+                    slot.innerText = "";
+                }
+            }
+        }
+
+        // Reset passcode inputs if wrong
+        function resetPasscode() {
+            currentInput = "";
+            updateSlots();
+        }
+
+        // 4. Validate Passcode
+        function verifyPasscode() {
+            if (currentInput === correctCode) {
+                document.getElementById('passcode-screen').classList.remove('active');
+                document.getElementById('message-screen').classList.add('active');
+            } else {
+                alert("Wrong Passcode baby! Try again! 💕");
+                resetPasscode();
+            }
+        }
+
+        // 5. 'No' button restriction logic
+        function rejectNo() {
+            alert("No option is not allowed! 😤 Click YES! 👉🏻👈🏻");
+            const noBtn = document.getElementById('no-button');
+            // Playfully shift location or alert
+            noBtn.style.position = 'absolute';
+            noBtn.style.top = Math.random() * 80 + '%';
+            noBtn.style.left = Math.random() * 80 + '%';
+        }
+
+        // 6. Show letter and trigger falling (💗) hearts
+        function showLoveLetter() {
+            document.getElementById('q-box').style.display = 'none';
+            document.getElementById('love-letter').style.display = 'block';
+            heartInterval = setInterval(createFallingHeart, 300);
+        }
+
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-fall';
+            heart.innerText = '💗';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+
+        // 7. Last Screen transition
+        function goToFinalPage() {
+            clearInterval(heartInterval);
+            document.getElementById('message-screen').classList.remove('active');
+            document.getElementById('final-screen').classList.add('active');
+        }
+    </script>
+</body>
+</html>
